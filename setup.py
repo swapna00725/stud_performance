@@ -7,6 +7,7 @@ def get_requirements()->List[str]:
         with open('requirements.txt','r') as file:
             lines=file.readlines()
             for line in lines:
+                
                 requirement=line.strip()
                 if requirement and requirement!='-e .':
                     requirement_lst.append(requirement)
