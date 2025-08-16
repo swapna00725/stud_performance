@@ -3,7 +3,7 @@
     <div class="login">
        <h1>Student Exam Performance Indicator</h1>
    
-       <form action="{{ url_for('predict_datapoint')}}" method="post">
+       <form action="{{ url_for('predict_datapoint') }}" method="post">
         <h1>
             <legend>Student Exam Performance Prediction</legend>
         </h1>
@@ -20,8 +20,8 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label">Race or Ethnicity</label>
-            <select class="form-control" name="ethnicity" placeholder="Enter you ethnicity" required>
+            <label class="form-label">Race_Ethnicity</label>
+            <select class="form-control" name="race_ethnicity" placeholder="Enter you ethnicity" required>
                 <option class="placeholder" selected disabled value="">Select Ethnicity</option>
                 <option value="group A">
                     Group A
@@ -91,9 +91,9 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label">maths Score out of 100</label>
-            <input class="form-control" type="number" name="reading_score"
-                placeholder="Enter your Reading score" min='0' max='100' />
+            <label class="form-label">math Score out of 100</label>
+            <input class="form-control" type="number" name="math_score"
+                placeholder="Enter your math score" min='0' max='100' />
         </div>
 
         <div class="mb-3">
@@ -107,7 +107,7 @@
                 placeholder="Enter your Reading Score" min='0' max='100' />
         </div>
         <div class="mb-3">
-            <input class="btn btn-primary" type="submit" value="Predicted performance level is" required />
+            <input class="btn btn-primary" type="submit" value="Predict" required />
         </div>
     </form>
     <h2>

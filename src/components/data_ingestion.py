@@ -7,8 +7,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
-from src.components.data_transformtion import DataTransformation
-from src.components.data_transformtion import DataTransformationConfig
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 
 from src.components.model_trainer import ModelTrainerConfig
 from src.components.model_trainer import ModelTrainer
@@ -26,7 +26,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method or component")
         try:
-            df=pd.read_csv('notebook\StudentsPerformance.csv')
+            df=pd.read_csv('notebook/StudentsPerformance.csv')
             logging.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
@@ -35,7 +35,7 @@ class DataIngestion:
 
             logging.info("Train test split initiated")
 
-            df.columns = df.columns.str.lower().str.replace(" ", "_")
+            df.columns = df.columns.str.lower().str.replace(r'[^a-z0-9]+', '_', regex=True)
 
             df['average_score'] = df[['math_score', 'reading_score', 'writing_score']].mean(axis=1)
 

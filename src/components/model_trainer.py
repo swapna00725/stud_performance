@@ -39,10 +39,17 @@ class ModelTrainer:
                 "Decision Tree": DecisionTreeClassifier(),
                 "Gradient Boosting": GradientBoostingClassifier(),
                 "Logistic Regression": LogisticRegression(),
-                "CatBoosting Classifier": CatBoostClassifier(verbose=False),
+                "CatBoost Classifier": CatBoostClassifier(verbose=False),
                 "AdaBoost Classifier": AdaBoostClassifier(),
              }
             params = {
+                "Random Forest": {
+                    'n_estimators': [4,8, 12],
+                    'criterion': ['gini', 'entropy', 'log_loss'],
+                    # 'max_features': ['sqrt', 'log2', None],
+                    'max_depth': [None, 5, 10, 15]
+                },
+
                 "Decision Tree": {
                     'criterion': ['gini', 'entropy', 'log_loss'],
                     # 'splitter': ['best', 'random'],
@@ -50,36 +57,28 @@ class ModelTrainer:
                     'max_depth': [None, 5, 10, 20, 30]
                 },
 
-                "Random Forest": {
-                    'n_estimators': [8, 16, 32, 64, 128, 256],
-                    'criterion': ['gini', 'entropy', 'log_loss'],
-                    # 'max_features': ['sqrt', 'log2', None],
-                    'max_depth': [None, 5, 10, 20, 30]
-                },
-
                 "Gradient Boosting": {
                     'learning_rate': [0.1, 0.01, 0.05, 0.001],
                     'subsample': [0.6, 0.7, 0.75, 0.8, 0.85, 0.9],
-                    'n_estimators': [8, 16, 32, 64, 128, 256],
+                    'n_estimators': [8, 16, 32],
                     'max_depth': [3, 5, 7, 10]
                 },
 
                 "Logistic Regression": {
-                    'penalty': ['l1', 'l2', 'elasticnet', None],
-                    'C': [0.01, 0.1, 1, 10, 100],
-                    'solver': ['liblinear', 'saga', 'lbfgs']
+                     'C': [0.01, 0.1, 1, 10],
+                
                 },
 
-                "CatBoostClassifier": {
+                "CatBoost Classifier": {
                     'depth': [6, 8, 10],
                     'learning_rate': [0.01, 0.05, 0.1],
-                    'iterations': [30, 50, 100]
+                    'iterations': [10, 20]
                 },
 
-                "AdaBoostClassifier": {
-                    'n_estimators': [8, 16, 32, 64, 128, 256],
+                "AdaBoost Classifier": {
+                    'n_estimators': [4,8, 16],
                     'learning_rate': [0.1, 0.01, 0.5, 0.001],
-                     # 'algorithm': ['SAMME', 'SAMME.R']
+                     
                 }
             }
 
@@ -96,10 +95,6 @@ class ModelTrainer:
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = models[best_model_name]
-
-            if best_model_score<0.6:
-                raise CustomException("No best model found")
-            logging.info(f"Best found model on both training and testing dataset")
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,

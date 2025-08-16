@@ -5,9 +5,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
-application=Flask(__name__)
-
-app=application
+app=Flask(__name__)
 
 ## Route for a home page
 
@@ -22,13 +20,13 @@ def predict_datapoint():
     else:
         data=CustomData(
             gender=request.form.get('gender'),
-            race_ethnicity=request.form.get('ethnicity'),
+            race_ethnicity=request.form.get('race_ethnicity'),
             parental_level_of_education=request.form.get('parental_level_of_education'),
             lunch=request.form.get('lunch'),
             test_preparation_course=request.form.get('test_preparation_course'),
-            maths_score=float(request.get.form('maths_score')),
-            reading_score=float(request.form.get('writing_score')),
-            writing_score=float(request.form.get('reading_score'))
+            math_score=float(request.form.get('math_score')),
+            reading_score=float(request.form.get('reading_score')),
+            writing_score=float(request.form.get('writing_score'))
 
         )
         pred_df=data.get_data_as_data_frame()
@@ -43,4 +41,4 @@ def predict_datapoint():
     
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0")        
+    app.run(host="0.0.0.0",debug=True)        
