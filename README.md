@@ -1,1 +1,1 @@
-## End to End ML Project##
+Student performance prediction --To predict the performance of the student based on some criteria (given in the dataset) and Maths,Reading and writing score #####
