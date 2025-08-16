@@ -1,10 +1,10 @@
 <html>
 <body>
     <div class="login">
-       <h1>Student Exam Performance Indicator</h1>
+       <h1 style="text-align:center; font-size:28px;">Student Exam Performance Indicator</h1>
    
        <form action="{{ url_for('predict_datapoint') }}" method="post">
-        <h1>
+        <h1 style="text-align:left; font-size:18px;">
             <legend>Student Exam Performance Prediction</legend>
         </h1>
         <div class="mb-3">
@@ -19,9 +19,10 @@
                 </option>
             </select>
         </div>
+
         <div class="mb-3">
             <label class="form-label">Race_Ethnicity</label>
-            <select class="form-control" name="race_ethnicity" placeholder="Enter you ethnicity" required>
+            <select class="form-control" name="race_ethnicity" placeholder="Enter your ethnicity" required>
                 <option class="placeholder" selected disabled value="">Select Ethnicity</option>
                 <option value="group A">
                     Group A
@@ -67,7 +68,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Lunch Type</label>
-            <select class="form-control" name="lunch" placeholder="Enter you Lunch" required>
+            <select class="form-control" name="lunch" placeholder="Enter your Lunch" required>
                 <option class="placeholder" selected disabled value="">Select Lunch Type</option>
                 <option value="free/reduced">
                     free/reduced
@@ -79,7 +80,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Test preparation Course</label>
-            <select class="form-control" name="test_preparation_course" placeholder="Enter you Course"
+            <select class="form-control" name="test_preparation_course" placeholder="Enter your Course"
                 required>
                 <option class="placeholder" selected disabled value="">Select Test_course</option>
                 <option value="none">
@@ -111,7 +112,7 @@
         </div>
     </form>
     <h2>
-       THE  prediction is {{results}}
+       The performance level of this student is {{results}}
     </h2>
    <body>
 </html>
