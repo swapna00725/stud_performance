@@ -1,27 +1,33 @@
 import sys
-from src.exception import CustomException
 from src.logger import logging
-import pandas as pd
+from src.exception import CustomException
 
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
 
-
-if __name__=="__main__":
+if __name__ == "__main__":
     try:
-        obj=DataIngestion()
-        train_data_path,test_data_path=obj.initiate_data_ingestion()
+        logging.info("========== Training Pipeline Started ==========")
 
-        data_transformation=DataTransformation()
-        train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data_path,test_data_path)
+        # Step 1: Data Ingestion
+        ingestion = DataIngestion()
+        train_data, test_data = ingestion.initiate_data_ingestion()
 
-        modeltrainer=ModelTrainer()
-        model_score=modeltrainer.initiate_model_trainer(train_arr,test_arr)
+        # Step 2: Data Transformation
+        transformer = DataTransformation()
+        train_arr, test_arr, _ = transformer.initiate_data_transformation(train_data, test_data)
 
-        logging.info("model training completed : {model_score}")
+        # Step 3: Model Training
+        trainer = ModelTrainer()
+        model_score = trainer.initiate_model_trainer(train_arr, test_arr)
 
-        print(f"final model score : {model_score}")
-    except Exception as e :
-        logging.error('training pipeline failed')
-        raise CustomException(e,sys)
+        logging.info(f"========== Training Pipeline Completed | Model Score: {model_score} ==========")
+        print(f"✅ Model Training Completed | Score: {model_score}")
+
+    except Exception as e:
+        logging.error("Pipeline failed due to an error")
+        raise CustomException(e, sys)
+
+
+  
